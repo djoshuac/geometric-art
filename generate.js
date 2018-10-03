@@ -48,14 +48,16 @@ function slash(type, p) {
 
 
 function tess() {
-  const colors = ['blue', 'yellow', 'green'];
+  // const colors = ['blue', 'yellow', 'green'];
+  const colors = ['#002b36', '#073642', '#586e75', '#657b83',
+                '#839496', '#93a1a1', '#eee8d5', '#fdf6e3']
   const slashes = ['forward', 'back']
-  const grid = 10;
+  const grid = [16, 9];
   const size = 100;
-  const svg = new SVG(grid * size, grid * size);
+  const svg = new SVG(grid[0] * size, grid[1] * size);
 
-  for (let i = 0; i < grid; i++) {
-    for (let j = 0; j < grid; j++) {
+  for (let i = 0; i < grid[0]; i++) {
+    for (let j = 0; j < grid[1]; j++) {
       const p = [
         [i * size, j * size],
         [(i + 1) * size, j * size],

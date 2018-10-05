@@ -51,34 +51,13 @@
     <label>x</label>
     <input type="number" id="height">
     <button id="recompute">Recompute</button>
+    <button id="download">Download</button>
   </div class="form">
 
+  <div id="svg-container"></div>
+
+  <script src="./helper.js"></script>
   <script src="./generate.js"></script>
-  <script>
-    window.addEventListener('load', () => {
-      const DEFAULT_WIDTH = 16;
-      const DEFAULT_HEIGHT = 9;
-
-      const $width = document.querySelector('#width');
-      const $height = document.querySelector('#height');
-      $width.value = DEFAULT_WIDTH;
-      $height.value = DEFAULT_HEIGHT;
-
-      let svg;
-
-      function compute() {
-        svg = tess($width.value, $height.value);
-        document.body.appendChild(svg);
-      }
-
-      function recompute() {
-        document.body.removeChild(svg)
-        compute();
-      }
-
-      compute();
-      document.querySelector('#recompute').addEventListener('click', recompute);
-    });
-  </script>
+  <script src="./main.js"></script>
 </body>
 </html>

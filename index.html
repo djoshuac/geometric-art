@@ -3,46 +3,7 @@
 <head>
   <title>Geometric Art</title>
   <link rel="icon" href="./favicon.png">
-  <style>
-    /* remove spinners: https://stackoverflow.com/a/22559163/5818631 */
-    input[type='number'] {
-      -moz-appearance:textfield;
-    }
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-    }
-
-    input[type=number] {
-        width: 3em;
-        margin: 8px 0;
-        box-sizing: border-box;
-        border: none;
-        border-bottom: 1px solid grey;
-        text-align: center;
-        transition: 0.2s;
-        outline: none;
-    }
-    input[type=number]:focus {
-        border-bottom: 2px solid black;
-    }
-
-    button {
-    	background-color: #e7e7e7;
-        color: black;
-        border: none;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
-    button:hover {
-    	background-color: #d7d7d7;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
   <div class="form">
@@ -56,8 +17,8 @@
 
   <div id="svg-container"></div>
 
-  <script src="./helper.js"></script>
-  <script src="./generate.js"></script>
-  <script src="./main.js"></script>
+  <script src="./js/helper.js"></script>
+  <script src="./js/generate.js"></script>
+  <script src="./js/main.js"></script>
 </body>
 </html>

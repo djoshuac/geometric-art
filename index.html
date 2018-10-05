@@ -2,12 +2,83 @@
 <html>
 <head>
   <title>Geometric Art</title>
+  <link rel="icon" href="./favicon.png">
+  <style>
+    /* remove spinners: https://stackoverflow.com/a/22559163/5818631 */
+    input[type='number'] {
+      -moz-appearance:textfield;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    input[type=number] {
+        width: 3em;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: none;
+        border-bottom: 1px solid grey;
+        text-align: center;
+        transition: 0.2s;
+        outline: none;
+    }
+    input[type=number]:focus {
+        border-bottom: 2px solid black;
+    }
+
+    button {
+    	background-color: #e7e7e7;
+        color: black;
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    button:hover {
+    	background-color: #d7d7d7;
+    }
+  </style>
 </head>
 <body>
+  <div class="form">
+    <label>Dimensions:</label>
+    <input type="number" id="width">
+    <label>x</label>
+    <input type="number" id="height">
+    <button id="recompute">Recompute</button>
+  </div class="form">
+
   <script src="./generate.js"></script>
   <script>
-    const svg = tess();
-    document.body.appendChild(svg);
+    window.addEventListener('load', () => {
+      const DEFAULT_WIDTH = 16;
+      const DEFAULT_HEIGHT = 9;
+
+      const $width = document.querySelector('#width');
+      const $height = document.querySelector('#height');
+      $width.value = DEFAULT_WIDTH;
+      $height.value = DEFAULT_HEIGHT;
+
+      let svg;
+
+      function compute() {
+        svg = tess($width.value, $height.value);
+        document.body.appendChild(svg);
+      }
+
+      function recompute() {
+        document.body.removeChild(svg)
+        compute();
+      }
+
+      compute();
+      document.querySelector('#recompute').addEventListener('click', recompute);
+    });
   </script>
 </body>
 </html>

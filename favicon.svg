@@ -1,0 +1,65 @@
+<svg width="400" height="400">
+  <polygon points="0,0 100,0 0,100" style="fill:#839496"></polygon>
+
+  <polygon points="100,0 0,100 100,100" style="fill:#586e75"></polygon>
+
+  <polygon points="0,100 100,100 100,200" style="fill:#839496"></polygon>
+
+  <polygon points="0,100 100,200 0,200" style="fill:#073642"></polygon>
+
+  <polygon points="0,200 100,200 100,300" style="fill:#eee8d5"></polygon>
+
+  <polygon points="0,200 100,300 0,300" style="fill:#fdf6e3"></polygon>
+
+  <polygon points="0,300 100,300 100,400" style="fill:#fdf6e3"></polygon>
+
+  <polygon points="0,300 100,400 0,400" style="fill:#93a1a1"></polygon>
+
+  <polygon points="100,0 200,0 200,100" style="fill:#eee8d5"></polygon>
+
+  <polygon points="100,0 200,100 100,100" style="fill:#073642"></polygon>
+
+  <polygon points="100,100 200,100 100,200" style="fill:#002b36"></polygon>
+
+  <polygon points="200,100 100,200 200,200" style="fill:#657b83"></polygon>
+
+  <polygon points="100,200 200,200 200,300" style="fill:#586e75"></polygon>
+
+  <polygon points="100,200 200,300 100,300" style="fill:#fdf6e3"></polygon>
+
+  <polygon points="100,300 200,300 100,400" style="fill:#073642"></polygon>
+
+  <polygon points="200,300 100,400 200,400" style="fill:#586e75"></polygon>
+
+  <polygon points="200,0 300,0 200,100" style="fill:#073642"></polygon>
+
+  <polygon points="300,0 200,100 300,100" style="fill:#073642"></polygon>
+
+  <polygon points="200,100 300,100 300,200" style="fill:#586e75"></polygon>
+
+  <polygon points="200,100 300,200 200,200" style="fill:#fdf6e3"></polygon>
+
+  <polygon points="200,200 300,200 300,300" style="fill:#eee8d5"></polygon>
+
+  <polygon points="200,200 300,300 200,300" style="fill:#586e75"></polygon>
+
+  <polygon points="200,300 300,300 200,400" style="fill:#586e75"></polygon>
+
+  <polygon points="300,300 200,400 300,400" style="fill:#073642"></polygon>
+
+  <polygon points="300,0 400,0 400,100" style="fill:#073642"></polygon>
+
+  <polygon points="300,0 400,100 300,100" style="fill:#839496"></polygon>
+
+  <polygon points="300,100 400,100 400,200" style="fill:#fdf6e3"></polygon>
+
+  <polygon points="300,100 400,200 300,200" style="fill:#586e75"></polygon>
+
+  <polygon points="300,200 400,200 300,300" style="fill:#fdf6e3"></polygon>
+
+  <polygon points="400,200 300,300 400,300" style="fill:#657b83"></polygon>
+
+  <polygon points="300,300 400,300 300,400" style="fill:#002b36"></polygon>
+
+  <polygon points="400,300 300,400 400,400" style="fill:#073642"></polygon>
+</svg>

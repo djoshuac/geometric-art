@@ -47,12 +47,12 @@ function slash(type, p) {
 }
 
 
-function tess() {
+function tess(width, height) {
   // const colors = ['blue', 'yellow', 'green'];
   const colors = ['#002b36', '#073642', '#586e75', '#657b83',
                 '#839496', '#93a1a1', '#eee8d5', '#fdf6e3']
   const slashes = ['forward', 'back']
-  const grid = [16, 9];
+  const grid = [width, height];
   const size = 100;
   const svg = new SVG(grid[0] * size, grid[1] * size);
 

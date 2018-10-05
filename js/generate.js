@@ -1,19 +1,3 @@
-// https://stackoverflow.com/a/35385518/5818631
-function htmlToElement(html) {
-  const template = document.createElement('template');
-  html = html.trim();
-  template.innerHTML = html;
-  return template.content.firstChild;
-}
-
-function randomInt(min, max) {
-  return Math.floor(Math.random() * Math.floor(max)) + min;
-}
-
-function randomItem(list) {
-  return list[randomInt(0, list.length)];
-}
-
 class SVG {
   constructor(width, height) {
     this.svg = htmlToElement(`
@@ -47,10 +31,7 @@ function slash(type, p) {
 }
 
 
-function tess(width, height) {
-  // const colors = ['blue', 'yellow', 'green'];
-  const colors = ['#002b36', '#073642', '#586e75', '#657b83',
-                '#839496', '#93a1a1', '#eee8d5', '#fdf6e3']
+function tess(width, height, colors) {
   const slashes = ['forward', 'back']
   const grid = [width, height];
   const size = 100;

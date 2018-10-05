@@ -20,6 +20,7 @@ window.addEventListener('load', () => {
   compute();
   document.querySelector('#recompute').addEventListener('click', recompute);
   document.querySelector('#download').addEventListener('click', download);
+  document.querySelector('#add-color').addEventListener('click', addNewColor);
   return;
 
   function compute() {
@@ -45,6 +46,10 @@ window.addEventListener('load', () => {
   function addColor(color) {
     const $input = createColorInput(color);
     $colors.appendChild($input);
+  }
+
+  function addNewColor() {
+    addColor('black');
   }
 
   function getColors() {

@@ -3,7 +3,14 @@ function createColorInput(color) {
     <input class="color">
   `);
   $input.addEventListener('change', (e) => {
-    setStyle(e.target, e.target.value);
+    const el = e.target;
+    const value = el.value;
+    if (value === '') {
+      el.parentElement.removeChild(el);
+    }
+    else {
+      setStyle(el, value);
+    }
   });
   $input.value = color;
   setStyle($input, color);

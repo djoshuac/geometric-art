@@ -36,21 +36,22 @@ function getImageData(file) {
 }
 
 function lloyds(image, n) {
-    const threshold = n * 6;
-    let centroids = Array(n).fill(0).map(() => randomPixel());
-    let change = Infinity;
-    const groups = centroids.map((centroid, index) => ({
-        index,
-        centroid,
-        pixels: [],
-    }));
-
     const pixels = [];
     for (let y = 0; y < image.height; y++) {
         for (let x = 0; x < image.width; x++) {
             pixels.push(get(image, x, y));
         }
     }
+    const bound = boundingBox(pixels);
+
+    const threshold = n * 6;
+    let centroids = Array(n).fill(0).map(() => randomPixel(bound));
+    let change = Infinity;
+    const groups = centroids.map((centroid, index) => ({
+        index,
+        centroid,
+        pixels: [],
+    }));
 
     while (change > threshold) {
         // assign pixels to the nearest centroid
@@ -63,7 +64,7 @@ function lloyds(image, n) {
         let oldCentroids = centroids;
         centroids = [];
         for (const group of groups) {
-            group.centroid = average(group.pixels);
+            group.centroid = average(group.pixels) ?? randomPixel(bound);
             centroids.push(group.centroid);
             group.pixels = []; // clear the groups for the next iteration
         }
@@ -78,15 +79,32 @@ function lloyds(image, n) {
     return centroids;
 }
 
+function boundingBox(pixels) {
+    const r = [0, 255];
+    const g = [0, 255];
+    const b = [0, 255];
+
+    for (const pixel of pixels) {
+        r[0] = Math.min(r[0], pixel[0]);
+        g[0] = Math.min(g[0], pixel[1]);
+        b[0] = Math.min(b[0], pixel[2]);
+        r[1] = Math.max(r[1], pixel[0]);
+        g[1] = Math.max(g[1], pixel[1]);
+        b[1] = Math.max(b[1], pixel[2]);
+    }
+
+    return [r, g, b]
+}
+
 function randInt(low, high) {
     return Math.floor(Math.random() * (high - low)) + low;
 }
 
-function randomPixel() {
+function randomPixel(bound) {
     return [
-        randInt(0, 255),
-        randInt(0, 255),
-        randInt(0, 255),
+        randInt(bound[0][0], bound[0][1]),
+        randInt(bound[1][0], bound[1][1]),
+        randInt(bound[2][0], bound[2][1]),
     ];
 }
 
@@ -131,7 +149,7 @@ function average(pixels) {
     const size = pixels.length;
 
     if (size === 0) {
-        return randomPixel();
+        return null;
     }
 
     for (const p of pixels) {

@@ -18,7 +18,7 @@ window.addEventListener('load', () => {
   let svg;
 
   compute();
-  document.querySelector('#recompute').addEventListener('click', recompute);
+  document.querySelector('#randomize').addEventListener('click', randomize);
   document.querySelector('#download').addEventListener('click', download);
   document.querySelector('#add-color').addEventListener('click', addNewColor);
   return;
@@ -28,7 +28,7 @@ window.addEventListener('load', () => {
     $contain.appendChild(svg);
   }
 
-  function recompute() {
+  function randomize() {
     $contain.removeChild(svg)
     compute();
   }

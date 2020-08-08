@@ -12,7 +12,7 @@ class SVG {
     const color = fill || 'black';
     const loc = points.map(p => p.join(',')).join(' ');
     this.svg.insertAdjacentHTML('beforeend', `
-      <polygon points="${loc}" style="fill:${fill}" />
+      <polygon points="${loc}" fill="${color}" stroke="${color}" />
     `);
   }
 }

@@ -2,24 +2,36 @@
 <html>
 <head>
   <title>Geometric Art</title>
-  <!-- <base href="https://djoshuac.github.io/geometric-art/"> -->
   <link rel="icon" href="./favicon.png">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
-  <div>
-    <label>Dimensions:</label>
-    <input type="number" id="width">
-    <label>x</label>
-    <input type="number" id="height">
-    <button id="randomize">Randomize</button>
-    <button id="download">Download</button>
-    <span id="colors"></span>
-    <button id="add-color">Add Color</button>
-    <input id='upload-image' type='file' accept="image/png, image/jpeg" hidden>
-    <button id='upload-image-button' type='button'>Sample Image</button>
-    <label>Sample Colors:</label>
-    <input type="number" id="n-colors">
+  <div class='menu'>
+    <ul class='menu-actions'>
+      <li id='menu-dimensions'>Dimensions</li>
+      <li id='menu-colors'>Colors</li>
+      <li id='menu-sample-image'>Sample Image</li>
+      <li class='menu-separator'>|</li>
+      <li id="randomize">Randomize</li>
+      <li id="download">Download</li>
+    </ul>
+    <div class='submenu'>
+      <span id='submenu-dimensions'>
+        <input type="number" id="height">
+        <label>x</label>
+        <input type="number" id="width">
+      </span>
+      <span id='submenu-colors'>
+        <span id="colors"></span>
+        <button id="add-color">Add Color</button>
+      </span>
+      <span id='submenu-sample-image'>
+        <input id='upload-image' type='file' accept="image/png, image/jpeg" hidden>
+        <label>Sample Colors:</label>
+        <input type="number" id="n-colors">
+        <button id='upload-image-button' type='button'>Browse...</button>
+      </span>
+    </div>
   </div>
 
   <div id="svg-container"></div>

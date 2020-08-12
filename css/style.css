@@ -1,3 +1,6 @@
+html, body {
+  font-family: Verdana,sans-serif;
+}
 
 /* remove spinners: https://stackoverflow.com/a/22559163/5818631 */
 input[type='number'] {
@@ -49,3 +52,41 @@ input.color:focus {
   border-width: 3px !important;
   font-size: 18px;
 }
+
+/* Menu - Derived from:
+ *  https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_black_active
+ */
+.menu-actions {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #e7e7e7;
+  color: black;
+}
+
+.menu-actions > li {
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.menu-actions > li:not(.menu-separator) {
+  cursor: pointer;
+}
+
+.menu-actions > li:hover:not(.active):not(.menu-separator) {
+  background-color: #d7d7d7;
+}
+
+.menu-actions > .active {
+  background-color: #002b36;
+  color: white;
+}
+
+.submenu > span:not(.active) {
+  display: none;
+}
+/** End Menu */

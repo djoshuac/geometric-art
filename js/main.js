@@ -1,4 +1,39 @@
 window.addEventListener('load', () => {
+  const $ = (selector) => document.querySelector(selector);
+  const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+  // Menu
+  function setupMenu() {
+    const active = {};
+    function setActive(item) {
+      if (active.$submenu != null) {
+        active.$menuItem.classList.remove('active');
+        active.$submenu.classList.remove('active');
+      }
+
+      const $menuItem = $(`#menu-${item}`);
+      const $submenu = $(`#submenu-${item}`);
+      $menuItem.classList.add('active');
+      $submenu.classList.add('active');
+      active.$menuItem = $menuItem;
+      active.$submenu = $submenu;
+    }
+
+    const menuItems = $$('.menu-actions > li')
+      .filter(m => m.id != null && m.id.startsWith('menu-'))
+      .map(m => m.id.replace('menu-', ''));
+    for (const item of menuItems) {
+      const $menuItem = $(`#menu-${item}`);
+      const $submenu = $(`#submenu-${item}`);
+      if ($menuItem == null || $submenu == null) {
+        console.error('Could not find menu and/or submenu for', item);
+      }
+      $menuItem.addEventListener('click', () => setActive(item));
+    }
+  }
+  setupMenu();
+
+  // Functionality
   const DEFAULT_WIDTH = 16;
   const DEFAULT_HEIGHT = 9;
   const DEFAULT_COLORS = [
@@ -7,12 +42,12 @@ window.addEventListener('load', () => {
   ];
   const DEFAULT_N_COLORS = 10;
 
-  const $contain = document.querySelector('#svg-container');
-  const $width = document.querySelector('#width');
-  const $height = document.querySelector('#height');
-  const $colors = document.querySelector('#colors');
-  const $uploadImage = document.querySelector('#upload-image');
-  const $nColors = document.querySelector('#n-colors');
+  const $contain = $('#svg-container');
+  const $width = $('#width');
+  const $height = $('#height');
+  const $colors = $('#colors');
+  const $uploadImage = $('#upload-image');
+  const $nColors = $('#n-colors');
 
   $width.value = DEFAULT_WIDTH;
   $height.value = DEFAULT_HEIGHT;
@@ -22,11 +57,11 @@ window.addEventListener('load', () => {
   let svg;
 
   compute();
-  document.querySelector('#randomize').addEventListener('click', randomize);
-  document.querySelector('#download').addEventListener('click', download);
-  document.querySelector('#add-color').addEventListener('click', addNewColor);
-  document.querySelector('#upload-image').addEventListener('change', useColorsFromImage);
-  document.querySelector('#upload-image-button').addEventListener('click', openUploadImage);
+  $('#randomize').addEventListener('click', randomize);
+  $('#download').addEventListener('click', download);
+  $('#add-color').addEventListener('click', addNewColor);
+  $('#upload-image').addEventListener('change', useColorsFromImage);
+  $('#upload-image-button').addEventListener('click', openUploadImage);
   return;
 
   function compute() {
@@ -60,14 +95,14 @@ window.addEventListener('load', () => {
 
   function getColors() {
     return [].map.call(
-      document.querySelectorAll('.color'),
+      $$('.color'),
       (c) => c.value,
     );
   }
 
   function clearColors() {
     return [].forEach.call(
-      document.querySelectorAll('.color'),
+      $$('.color'),
       (c) => c.parentElement.removeChild(c),
     );
   }
@@ -84,9 +119,44 @@ window.addEventListener('load', () => {
     for (const color of colors) {
       addColor(color);
     }
+
+    randomize();
   }
 
   function openUploadImage() {
     $uploadImage.click();
+  }
+
+  function useScreenAspectRatio() {
+    function gcd(m, n) {
+      if (m < n)
+        return gcd(n, m);
+      else if (m == n )
+        return m;
+      else
+        return gcd(n, m % n);
+    }
+
+    const height = window.screen.height;
+    const width = window.screen.width;
+
+    const d = gcd(height, width);
+    $height.value = height / d;
+    $width.value = width / d;
+
+    randomize();
+  }
+
+  function requestFullScreen(element) {
+    const requestMethod = element.requestFullScreen
+      || element.webkitRequestFullScreen
+      || element.mozRequestFullScreen
+      || element.msRequestFullScreen;
+
+    if (requestMethod) {
+      requestMethod.call(element);
+    } else {
+      console.error('cannot do fullscreen');
+    }
   }
 });

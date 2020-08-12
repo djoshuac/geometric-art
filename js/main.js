@@ -56,22 +56,21 @@ window.addEventListener('load', () => {
 
   let svg;
 
-  compute();
+  useScreenDimensions();
   $('#randomize').addEventListener('click', randomize);
   $('#download').addEventListener('click', download);
   $('#add-color').addEventListener('click', addNewColor);
   $('#upload-image').addEventListener('change', useColorsFromImage);
   $('#upload-image-button').addEventListener('click', openUploadImage);
+  $('#use-screen').addEventListener('click', useScreenDimensions);
   return;
 
-  function compute() {
+  function randomize() {
+    if (svg != null) {
+      $contain.removeChild(svg)
+    }
     svg = tess($width.value, $height.value, getColors());
     $contain.appendChild(svg);
-  }
-
-  function randomize() {
-    $contain.removeChild(svg)
-    compute();
   }
 
   function download() {
@@ -127,11 +126,11 @@ window.addEventListener('load', () => {
     $uploadImage.click();
   }
 
-  function useScreenAspectRatio() {
+  function useScreenDimensions() {
     function gcd(m, n) {
       if (m < n)
         return gcd(n, m);
-      else if (m == n )
+      else if (n <= 0)
         return m;
       else
         return gcd(n, m % n);

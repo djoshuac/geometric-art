@@ -153,11 +153,15 @@ window.addEventListener('load', () => {
       $width.value = width / d;
       $size.value = d;
     } else if (h > w) {
-      $height.value = Math.max($height.value, $width.value);
-      $width.value = Math.min($height.value, $width.value);
+      const mn = Math.max($height.value, $width.value);
+      const mx = Math.min($height.value, $width.value);
+      $height.value = mx;
+      $width.value = mn;
     } else if (h < w) {
-      $height.value = Math.min($height.value, $width.value);
-      $width.value = Math.max($height.value, $width.value);
+      const mn = Math.max($height.value, $width.value);
+      const mx = Math.min($height.value, $width.value);
+      $height.value = mn;
+      $width.value = mx;
     }
 
     randomize();

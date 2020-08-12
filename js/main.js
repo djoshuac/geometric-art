@@ -11,6 +11,7 @@ window.addEventListener('load', () => {
   const $width = document.querySelector('#width');
   const $height = document.querySelector('#height');
   const $colors = document.querySelector('#colors');
+  const $uploadImage = document.querySelector('#upload-image');
   const $nColors = document.querySelector('#n-colors');
 
   $width.value = DEFAULT_WIDTH;
@@ -25,6 +26,7 @@ window.addEventListener('load', () => {
   document.querySelector('#download').addEventListener('click', download);
   document.querySelector('#add-color').addEventListener('click', addNewColor);
   document.querySelector('#upload-image').addEventListener('change', useColorsFromImage);
+  document.querySelector('#upload-image-button').addEventListener('click', openUploadImage);
   return;
 
   function compute() {
@@ -82,5 +84,9 @@ window.addEventListener('load', () => {
     for (const color of colors) {
       addColor(color);
     }
+  }
+
+  function openUploadImage() {
+    $uploadImage.click();
   }
 });

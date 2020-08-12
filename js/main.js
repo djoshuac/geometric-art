@@ -42,6 +42,7 @@ window.addEventListener('load', () => {
     '#839496', '#93a1a1', '#eee8d5', '#fdf6e3'
   ];
   const DEFAULT_N_COLORS = 10;
+  const DEFAULT_FILE_NAME = 'geometric-art.png';
 
   const $contain = $('#svg-container');
   const $width = $('#width');
@@ -50,12 +51,14 @@ window.addEventListener('load', () => {
   const $uploadImage = $('#upload-image');
   const $nColors = $('#n-colors');
   const $size = $('#size');
+  const $fileName = $('#file-name');
 
   $width.value = DEFAULT_WIDTH;
   $height.value = DEFAULT_HEIGHT;
   $size.value = DEFAULT_SIZE;
   DEFAULT_COLORS.forEach(addColor);
   $nColors.value = DEFAULT_N_COLORS;
+  $fileName.value = DEFAULT_FILE_NAME;
 
   let svg;
 
@@ -77,14 +80,12 @@ window.addEventListener('load', () => {
     $contain.appendChild(svg);
   }
 
-  function download() {
-    const svgString = $contain.innerHTML;
-    const blob = new Blob([svgString], {
-      type: 'image/svg+xml;charset=utf-8'
-    });
-    const blobUrl = URL.createObjectURL(blob);
-    downloadUri(blobUrl, 'geometric.svg');
-    URL.revokeObjectURL(blobUrl);
+  async function download() {
+    const height = parseInt($height.value) * parseInt($size.value);
+    const width = parseInt($width.value) * parseInt($size.value);
+    const pngUrl = await svgToPng(svg, height, width);
+    downloadUri(pngUrl, $fileName.value);
+    URL.revokeObjectURL(pngUrl);
   }
 
   function addColor(color) {

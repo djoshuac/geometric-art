@@ -31,6 +31,7 @@ function getImageData(file) {
             canvas.width = image.width;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(image, 0, 0);
+            URL.revokeObjectURL(image.src);
             const data = ctx.getImageData(0, 0, canvas.width, canvas.height)
             resolve(data);
         };
@@ -166,4 +167,26 @@ function average(pixels) {
         g / size,
         b / size,
     ];
+}
+
+function svgToPng(svg, height, width) {
+    return new Promise((resolve, reject) => {
+        const xml = new XMLSerializer().serializeToString(svg);
+
+        const canvas = document.createElement('canvas');
+        canvas.height = height;
+        canvas.width = width;
+        
+        const svg64 = btoa(xml);
+        const b64Start = 'data:image/svg+xml;base64,';
+        const image64 = b64Start + svg64;
+
+        const image = new Image();
+        image.src = image64;
+        image.onload = () => {
+            canvas.getContext('2d').drawImage(image, 0, 0);
+            resolve(canvas.toDataURL());
+        };
+        image.onerror = reject;
+    });
 }

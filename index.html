@@ -11,16 +11,16 @@
       <li id='menu-dimensions'>Dimensions</li>
       <li id='menu-colors'>Colors</li>
       <li id='menu-sample-image'>Sample Image</li>
+      <li id='menu-download'>Download</li>
       <li class='menu-separator'>|</li>
       <li id="randomize">Randomize</li>
-      <li id="download">Download</li>
       <li id="test">Test</li>
     </ul>
     <div class='submenu'>
       <span id='submenu-dimensions'>
-        <input type="number" id="height">
+        <input class='text' type="number" id="height">
         <label>x</label>
-        <input type="number" id="width">
+        <input class='text' type="number" id="width">
         <input type="number" id="size" class='hidden'>
         <button id="use-screen">Reset</button>
       </span>
@@ -31,8 +31,12 @@
       <span id='submenu-sample-image'>
         <input id='upload-image' type='file' accept="image/png, image/jpeg" hidden>
         <label>Sample Colors:</label>
-        <input type="number" id="n-colors">
+        <input class='text' type="number" id="n-colors">
         <button id='upload-image-button' type='button'>Browse...</button>
+      </span>
+      <span id='submenu-download'>
+        <input class='text wide' type="text" id="file-name">
+        <button id="download">Download</button>
       </span>
     </div>
   </div>

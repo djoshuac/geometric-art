@@ -7,6 +7,7 @@ async function sampleColorsFromImage(file, n) {
     return pixels.map(pixelToColor);
 }
 
+
 function componentToHex(c) {
     const hex = Math.floor(c).toString(16);
     return hex.length == 1 ? "0" + hex : hex;
@@ -26,6 +27,8 @@ function getImageData(file) {
         image.src = URL.createObjectURL(file);
         image.onload = function() {
             const canvas = document.createElement('canvas');
+            canvas.height = image.height;
+            canvas.width = image.width;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(image, 0, 0);
             const data = ctx.getImageData(0, 0, canvas.width, canvas.height)

@@ -144,9 +144,16 @@ window.addEventListener('load', () => {
     const width = window.screen.width || document.body.clientWidth;
 
     const d = gcd(height, width);
-    $height.value = height / d;
-    $width.value = width / d;
-    $size.value = d;
+    const h = height / d;
+    const w = width / d;
+
+    if (h < 50 && w < 50 && d > 10) {
+      $height.value = height / d;
+      $width.value = width / d;
+      $size.value = d;
+    } else {
+      console.error('screen detection failed');
+    }
 
     randomize();
   }

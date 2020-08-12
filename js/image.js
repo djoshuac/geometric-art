@@ -83,9 +83,9 @@ function lloyds(image, n) {
 }
 
 function boundingBox(pixels) {
-    const r = [0, 255];
-    const g = [0, 255];
-    const b = [0, 255];
+    const r = [255, 0];
+    const g = [255, 0];
+    const b = [255, 0];
 
     for (const pixel of pixels) {
         r[0] = Math.min(r[0], pixel[0]);

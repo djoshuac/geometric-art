@@ -151,8 +151,12 @@ window.addEventListener('load', () => {
       $height.value = height / d;
       $width.value = width / d;
       $size.value = d;
-    } else {
-      console.error('screen detection failed');
+    } else if (h > w) {
+      $height.value = Math.max($height.value, $width.value);
+      $width.value = Math.min($height.value, $width.value);
+    } else if (h < w) {
+      $height.value = Math.min($height.value, $width.value);
+      $width.value = Math.max($height.value, $width.value);
     }
 
     randomize();

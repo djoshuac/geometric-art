@@ -13,28 +13,28 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     width: 2em;
-    margin: 8px 0;
+    margin: 0.2em 0;
     box-sizing: border-box;
     border: none;
-    border-bottom: 1px solid grey;
+    border-bottom: 0.1em solid grey;
     text-align: center;
     transition: 0.2s;
     outline: none;
 }
 input[type=number]:focus {
-    border-bottom: 2px solid black;
+    border-bottom: 0.15em solid black;
 }
 
 button {
   background-color: #e7e7e7;
   color: black;
   border: none;
-  padding: 15px 32px;
+  padding: 0.85em 1em;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  font-size: 1em;
+  margin: 0.1em 0.3em;
   cursor: pointer;
 }
 button:hover {
@@ -44,13 +44,13 @@ button:hover {
 input.color {
   outline: none;
   transition: 0.2s;
-  font-size: 16px;
+  font-size: 1em;
   width: 5em;
   text-align: center;
 }
 input.color:focus {
-  border-width: 3px !important;
-  font-size: 18px;
+  border-width: 0.3em !important;
+  font-size: 1em;
 }
 
 /* Menu - Derived from:
@@ -69,7 +69,7 @@ input.color:focus {
   float: left;
   display: block;
   text-align: center;
-  padding: 14px 16px;
+  padding: 0.85em 0.9em;
   text-decoration: none;
 }
 

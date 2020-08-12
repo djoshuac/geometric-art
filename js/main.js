@@ -36,6 +36,7 @@ window.addEventListener('load', () => {
   // Functionality
   const DEFAULT_WIDTH = 16;
   const DEFAULT_HEIGHT = 9;
+  const DEFAULT_SIZE = 100;
   const DEFAULT_COLORS = [
     '#002b36', '#073642', '#586e75', '#657b83',
     '#839496', '#93a1a1', '#eee8d5', '#fdf6e3'
@@ -48,9 +49,11 @@ window.addEventListener('load', () => {
   const $colors = $('#colors');
   const $uploadImage = $('#upload-image');
   const $nColors = $('#n-colors');
+  const $size = $('#size');
 
   $width.value = DEFAULT_WIDTH;
   $height.value = DEFAULT_HEIGHT;
+  $size.value = DEFAULT_SIZE;
   DEFAULT_COLORS.forEach(addColor);
   $nColors.value = DEFAULT_N_COLORS;
 
@@ -63,13 +66,14 @@ window.addEventListener('load', () => {
   $('#upload-image').addEventListener('change', useColorsFromImage);
   $('#upload-image-button').addEventListener('click', openUploadImage);
   $('#use-screen').addEventListener('click', useScreenDimensions);
+  $('#test').addEventListener('click', requestFullScreen);
   return;
 
   function randomize() {
     if (svg != null) {
       $contain.removeChild(svg)
     }
-    svg = tess($width.value, $height.value, getColors());
+    svg = tess($width.value, $height.value, $size.value, getColors());
     $contain.appendChild(svg);
   }
 
@@ -142,11 +146,14 @@ window.addEventListener('load', () => {
     const d = gcd(height, width);
     $height.value = height / d;
     $width.value = width / d;
+    $size.value = d;
+    console.log(d)
 
     randomize();
   }
 
-  function requestFullScreen(element) {
+  function requestFullScreen() {
+    const element = svg;
     const requestMethod = element.requestFullScreen
       || element.webkitRequestFullScreen
       || element.mozRequestFullScreen

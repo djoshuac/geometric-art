@@ -90,3 +90,7 @@ input.color:focus {
   display: none;
 }
 /** End Menu */
+
+.hidden {
+  display: none;
+}

@@ -31,10 +31,9 @@ function slash(type, p) {
 }
 
 
-function tess(width, height, colors) {
+function tess(width, height, size, colors) {
   const slashes = ['forward', 'back']
   const grid = [width, height];
-  const size = 100;
   const svg = new SVG(grid[0] * size, grid[1] * size);
 
   for (let i = 0; i < grid[0]; i++) {

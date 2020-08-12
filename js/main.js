@@ -140,14 +140,13 @@ window.addEventListener('load', () => {
         return gcd(n, m % n);
     }
 
-    const height = window.screen.height;
-    const width = window.screen.width;
+    const height = window.screen.height || document.body.clientHeight;
+    const width = window.screen.width || document.body.clientWidth;
 
     const d = gcd(height, width);
     $height.value = height / d;
     $width.value = width / d;
     $size.value = d;
-    console.log(d)
 
     randomize();
   }

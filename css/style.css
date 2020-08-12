@@ -1,5 +1,6 @@
 html, body {
   font-family: Verdana,sans-serif;
+  margin: 0 0;
 }
 
 /* remove spinners: https://stackoverflow.com/a/22559163/5818631 */
@@ -84,6 +85,10 @@ input.color:focus {
 .menu-actions > .active {
   background-color: #002b36;
   color: white;
+}
+
+.submenu {
+  padding: 0 0 0 1em;
 }
 
 .submenu > span:not(.active) {

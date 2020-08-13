@@ -4,6 +4,7 @@ class SVG {
       <svg
         width=${width}
         height=${height}
+        shape-rendering="crispEdges"
       ></svg>
     `);
   }
@@ -12,7 +13,7 @@ class SVG {
     const color = fill || 'black';
     const loc = points.map(p => p.join(',')).join(' ');
     this.svg.insertAdjacentHTML('beforeend', `
-      <polygon points="${loc}" fill="${color}" stroke="${color}" />
+      <polygon points="${loc}" fill="${color}" />
     `);
   }
 }

@@ -1,6 +1,8 @@
 window.addEventListener('load', () => {
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
+  
+  let svg;
 
   // Menu
   function setupMenu() {
@@ -43,6 +45,10 @@ window.addEventListener('load', () => {
       $option.classList.add('active');
       chosen.value = $option.value;
       chosen.$elem = $option;
+      
+      if (svg != null) {
+        randomize();
+      }
     }
 
     const $options = $$(groupSelector);
@@ -83,8 +89,6 @@ window.addEventListener('load', () => {
   $nColors.value = DEFAULT_N_COLORS;
   $fileName.value = DEFAULT_FILE_NAME;
   const $pattern = setupToggleGroup('#submenu-patterns > button', 'normal');
-
-  let svg;
 
   useScreenDimensions();
   $('#randomize').addEventListener('click', randomize);

@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
   // Menu
   function setupMenu() {
     const active = {};
-    function setActive(item) {
+    function setActive(item, ) {
       if (active.$submenu != null) {
         active.$menuItem.classList.remove('active');
         active.$submenu.classList.remove('active');
@@ -33,6 +33,29 @@ window.addEventListener('load', () => {
   }
   setupMenu();
 
+  // Toggle
+  function setupToggleGroup(groupSelector, activeOption) {
+    const chosen = {};
+    function setActive($option) {
+      if (chosen.$elem != null) {
+        chosen.$elem.classList.remove('active');
+      }
+      $option.classList.add('active');
+      chosen.value = $option.value;
+      chosen.$elem = $option;
+    }
+
+    const $options = $$(groupSelector);
+    for (const $option of $options) {
+      if ($option.value === activeOption) {
+        setActive($option);
+      }
+      $option.addEventListener('click', () => setActive($option));
+    }
+
+    return chosen;
+  }
+
   // Functionality
   const DEFAULT_WIDTH = 16;
   const DEFAULT_HEIGHT = 9;
@@ -59,6 +82,7 @@ window.addEventListener('load', () => {
   DEFAULT_COLORS.forEach(addColor);
   $nColors.value = DEFAULT_N_COLORS;
   $fileName.value = DEFAULT_FILE_NAME;
+  const $pattern = setupToggleGroup('#submenu-patterns > button', 'normal');
 
   let svg;
 
@@ -76,7 +100,19 @@ window.addEventListener('load', () => {
     if (svg != null) {
       $contain.removeChild(svg)
     }
-    svg = tess($width.value, $height.value, $size.value, getColors());
+    const width = $width.value;
+    const height = $height.value;
+    const size = $size.value;
+    const pattern = $pattern.value;
+    const colors = getColors();
+
+    if (pattern === 'normal') {
+      svg = tess(width, height, size, colors);
+    } else if(pattern === 'herringbone') {
+      svg = herringbone(width, height, size, colors);
+    } else {
+      console.error('Pattern not implemented', pattern);
+    }
     $contain.appendChild(svg);
   }
 

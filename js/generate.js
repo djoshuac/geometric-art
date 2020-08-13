@@ -32,12 +32,11 @@ function slash(type, p) {
 
 
 function tess(width, height, size, colors) {
+  const svg = new SVG(width * size, height * size);
   const slashes = ['forward', 'back']
-  const grid = [width, height];
-  const svg = new SVG(grid[0] * size, grid[1] * size);
 
-  for (let i = 0; i < grid[0]; i++) {
-    for (let j = 0; j < grid[1]; j++) {
+  for (let i = 0; i < width; i++) {
+    for (let j = 0; j < height; j++) {
       const p = [
         [i * size, j * size],
         [(i + 1) * size, j * size],
@@ -49,6 +48,36 @@ function tess(width, height, size, colors) {
 
       svg.addPolygon(t[0], randomItem(colors));
       svg.addPolygon(t[1], randomItem(colors));
+    }
+  }
+
+  return svg.svg;
+}
+
+
+function herringbone(width, height, size, colors) {
+  const svg = new SVG(width * size, height * size);
+
+  const density = 4;
+  const s = size / density;
+
+
+  for (let i = -2; i < width * density; i += 4) {
+    for (let j = -2; j < height * density; j += 2) {
+      const t1 = [
+        [(i + 0) * s, (j + 0) * s],
+        [(i + 2) * s, (j - 2) * s],
+        [(i + 3) * s, (j - 1) * s],
+        [(i + 1) * s, (j + 1) * s],
+      ];
+      const t2 = [
+        [(i + 2) * s, (j + 0) * s],
+        [(i + 3) * s, (j - 1) * s],
+        [(i + 5) * s, (j + 1) * s],
+        [(i + 4) * s, (j + 2) * s],
+      ];
+      svg.addPolygon(t1, randomItem(colors));
+      svg.addPolygon(t2, randomItem(colors));
     }
   }
 

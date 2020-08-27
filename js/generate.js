@@ -116,3 +116,29 @@ function kites(width, height, size, colors) {
 
   return svg.svg;
 }
+
+function palette(width, height, size, colors) {
+  const svg = new SVG(width * size, height * size);
+
+  const n = colors.length;
+  const w = width * size / n;
+
+  // sort colors
+  colors.sort((color1, color2) => {
+    const rgb1 = Object.values(hexToRgb(color1));
+    const rgb2 = Object.values(hexToRgb(color2));
+    return sum(rgb1.map(Math.sqrt)) - sum(rgb2.map(Math.sqrt))
+  });
+
+  for (let i = 0; i < colors.length; i++) {
+    const x = i * w
+    svg.addPolygon([
+      [x, 0],
+      [x, height * size],
+      [x + w, height * size],
+      [x + w, 0],
+    ], colors[i]);
+  }
+
+  return svg.svg;
+}

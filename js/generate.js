@@ -1,19 +1,22 @@
 class SVG {
-  constructor(width, height) {
+  constructor(width, height, crispEdges=true) {
+    const crisp = crispEdges ? 'shape-rendering="crispEdges"' : '';
     this.svg = htmlToElement(`
       <svg
         width=${width}
         height=${height}
-        shape-rendering="crispEdges"
+        ${crisp}
       ></svg>
     `);
   }
 
-  addPolygon(points, fill) {
+  addPolygon(points, fill, rotate=null) {
     const color = fill || 'black';
     const loc = points.map(p => p.join(',')).join(' ');
+    const rot = rotate == null ? '' : `transform="rotate(${rotate.map(x => x.toString()).join(', ')})"`;
+
     this.svg.insertAdjacentHTML('beforeend', `
-      <polygon points="${loc}" fill="${color}" />
+      <polygon points="${loc}" fill="${color}" ${rot}/>
     `);
   }
 }
@@ -79,6 +82,35 @@ function herringbone(width, height, size, colors) {
       ];
       svg.addPolygon(t1, randomItem(colors));
       svg.addPolygon(t2, randomItem(colors));
+    }
+  }
+
+  return svg.svg;
+}
+
+function kites(width, height, size, colors) {
+  const svg = new SVG(width * size, height * size, false);
+
+  const density = 2;
+  const h = size / 4;
+  const w = size / 3;
+
+  const shape = [
+    [w*0.1, h*1],
+    [w*1, h*3],
+    [w*1.9, h*1],
+    [w*1, h*0],
+  ];
+
+  for (let i = 0; i < height * density; i++) {
+    const y0 = size * i / density;
+    for (let j = 0; j < width * density; j++) {
+      const x0 = size * j / density;
+      svg.addPolygon(
+        shape.map(([x, y]) => [x + x0, y + y0]),
+        randomItem(colors),
+        [randomInt(0, 360), x0, y0]
+      );
     }
   }
 

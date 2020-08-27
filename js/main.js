@@ -88,7 +88,7 @@ window.addEventListener('load', () => {
   DEFAULT_COLORS.forEach(addColor);
   $nColors.value = DEFAULT_N_COLORS;
   $fileName.value = DEFAULT_FILE_NAME;
-  const $pattern = setupToggleGroup('#submenu-patterns > button', 'normal');
+  const $pattern = setupToggleGroup('#submenu-patterns > button', 'kites');
 
   useScreenDimensions();
   $('#randomize').addEventListener('click', randomize);
@@ -114,6 +114,8 @@ window.addEventListener('load', () => {
       svg = tess(width, height, size, colors);
     } else if(pattern === 'herringbone') {
       svg = herringbone(width, height, size, colors);
+    } else if (pattern === 'kites') {
+      svg = kites(width, height, size, colors);
     } else {
       console.error('Pattern not implemented', pattern);
     }

@@ -91,13 +91,13 @@ window.addEventListener('load', () => {
   const $pattern = setupToggleGroup('#submenu-patterns > button', 'palette');
 
   useScreenDimensions();
-  $('#randomize').addEventListener('click', randomize);
+  $('#main-menu-randomize').addEventListener('click', randomize);
   $('#download').addEventListener('click', download);
   $('#add-color').addEventListener('click', addNewColor);
   $('#upload-image').addEventListener('change', useColorsFromImage);
   $('#upload-image-button').addEventListener('click', openUploadImage);
   $('#use-screen').addEventListener('click', useScreenDimensions);
-  $('#test').addEventListener('click', requestFullScreen);
+  $('#main-menu-full-screen').addEventListener('click', requestFullScreen);
   return;
 
   function randomize() {

@@ -125,9 +125,36 @@ function palette(width, height, size, colors) {
 
   // sort colors
   colors.sort((color1, color2) => {
-    const rgb1 = Object.values(hexToRgb(color1));
-    const rgb2 = Object.values(hexToRgb(color2));
-    return sum(rgb1.map(Math.sqrt)) - sum(rgb2.map(Math.sqrt))
+    const colorTypes = [
+      /^#[a-f\d]{6}$/i, // e.g. #000000
+      /^#[a-f\d]{3}$/i, // e.g. #000
+    ]
+
+    const color1Type = colorTypes.findIndex((reg) => reg.test(color1))
+    const color2Type = colorTypes.findIndex((reg) => reg.test(color2))
+
+    if (color1Type !== color2Type) {
+      return color1Type - color2Type
+    }
+
+    // Case: #000000
+    if (color1Type == 0) {
+      const rgb1 = Object.values(hexToRgb(color1));
+      const rgb2 = Object.values(hexToRgb(color2));
+      return sum(rgb1.map(Math.sqrt)) - sum(rgb2.map(Math.sqrt))
+    }
+
+    // Case: #000
+    if (color1Type == 1) {
+      const rgb1 = Object.values(hex3ToRgb(color1));
+      const rgb2 = Object.values(hex3ToRgb(color2));
+      return sum(rgb1.map(Math.sqrt)) - sum(rgb2.map(Math.sqrt))
+    }
+
+    // Case: lexicographical order
+    if (color1 < color2) return -1
+    if (color1 > color2) return 1
+    return 0
   });
 
   for (let i = 0; i < colors.length; i++) {

@@ -97,6 +97,13 @@ window.addEventListener('load', () => {
   $('#upload-image').addEventListener('change', useColorsFromImage);
   $('#upload-image-button').addEventListener('click', openUploadImage);
   $('#use-screen').addEventListener('click', useScreenDimensions);
+  for (const button of $$('.dimWidthByHeight')) {
+    const [width, height] = button.innerText.trim().split('x')
+    button.addEventListener('click', (e) => {
+      $width.value = width
+      $height.value = height
+    })
+  }
   $('#main-menu-full-screen').addEventListener('click', requestFullScreen);
   return;
 

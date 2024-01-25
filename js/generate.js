@@ -25,33 +25,89 @@ function slash(type, p) {
   return {
     'forward': [
       [p[0], p[1], p[3]],
-      [p[1], p[3], p[2]]
+      [p[1], p[3], p[2]],
     ],
     'back': [
+      [p[0], p[2], p[3]],
       [p[0], p[1], p[2]],
-      [p[0], p[2], p[3]]
     ]
   }[type];
 }
 
 
-function tess(width, height, size, colors) {
+function tess(width, height, size, colors, colorStrategy) {
   const svg = new SVG(width * size, height * size);
   const slashes = ['forward', 'back']
 
-  for (let i = 0; i < width; i++) {
-    for (let j = 0; j < height; j++) {
+  // create nodes
+  const nodes = []
+  for (let i = 0; i < height; i++) {
+    const row = []
+    for (let j = 0; j < width; j++) {
+      const slash = randomItem(slashes) // determine if square is forward slash or backward slash
+      if (colorStrategy === 'random') {
+        const square = [
+          new GraphNode({ slash: slash, color: randomItem(colors) }),
+          new GraphNode({ slash: slash, color: randomItem(colors) }),
+        ]
+        row.push(square)
+      } else {
+        row.push([
+          new GraphNode({ slash: slash }),
+          new GraphNode({ slash: slash }),
+        ])
+      }
+    }
+    nodes.push(row)
+  }
+
+  // handle n-coloring of graph
+  if (colorStrategy === 'k-color') {
+    // initialize neighbors
+    for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
+        const [top, bottom] = inBoundsIndex(nodes, i, j)
+        const north = inBoundsIndex(nodes, i-1, j, 1) // bottom of square above
+        const south = inBoundsIndex(nodes, i+1, j, 0) // top of square below
+
+        // need to check slash for east and west
+        const eastTop = inBoundsIndex(nodes, i, j+1, 0)
+        const eastBottom = inBoundsIndex(nodes, i, j+1, 1)
+        const westTop = inBoundsIndex(nodes, i, j-1, 0)
+        const westBottom = inBoundsIndex(nodes, i, j-1, 1)
+        const east = eastTop?.data?.slash === 'forward' ? eastTop : eastBottom // top if forward
+        const west = westTop?.data?.slash === 'forward' ? westBottom : westTop // bottom if forward
+
+        top.neighbors.push(bottom)
+        bottom.neighbors.push(top)
+
+        if (top.data.slash === 'forward') {
+          top.neighbors.push(...[north, west].filter(n => n != null))
+          bottom.neighbors.push(...[east, south].filter(n => n != null))
+        } else {
+          top.neighbors.push(...[north, east].filter(n => n != null))
+          bottom.neighbors.push(...[west, south].filter(n => n != null))
+        }
+      }
+    }
+
+    const graph = new Graph(nodes)
+    graph.colorNodes(colors)
+  }
+
+  // create the svg
+  for (let i = 0; i < height; i++) {
+    for (let j = 0; j < width; j++) {
       const p = [
-        [i * size, j * size],
-        [(i + 1) * size, j * size],
-        [(i + 1) * size, (j + 1) * size],
-        [i * size, (j + 1) * size]
+        [j * size, i * size],
+        [j * size, (i + 1) * size,],
+        [(j + 1) * size, (i + 1) * size],
+        [(j + 1) * size, i * size]
       ];
 
-      const t = slash(randomItem(slashes), p);
-
-      svg.addPolygon(t[0], randomItem(colors));
-      svg.addPolygon(t[1], randomItem(colors));
+      const t = slash(nodes[i][j][0].data.slash, p);
+      svg.addPolygon(t[0], nodes[i][j][0].data.color);
+      svg.addPolygon(t[1], nodes[i][j][1].data.color);
     }
   }
 

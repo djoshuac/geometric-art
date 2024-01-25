@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
   // Menu
   function setupMenu() {
     const active = {};
-    function setActive(item, ) {
+    function setActive(item) {
       if (active.$submenu != null) {
         active.$menuItem.classList.remove('active');
         active.$submenu.classList.remove('active');
@@ -89,6 +89,7 @@ window.addEventListener('load', () => {
   $nColors.value = DEFAULT_N_COLORS;
   $fileName.value = DEFAULT_FILE_NAME;
   const $pattern = setupToggleGroup('#submenu-patterns > button', 'palette');
+  const $colorStrategy = setupToggleGroup('#submenu-color-strategy > button', 'random');
 
   useScreenDimensions();
   $('#main-menu-randomize').addEventListener('click', randomize);
@@ -109,9 +110,10 @@ window.addEventListener('load', () => {
     const size = $size.value;
     const pattern = $pattern.value;
     const colors = getColors();
+    const colorStrategy = $colorStrategy.value;
 
     if (pattern === 'normal') {
-      svg = tess(width, height, size, colors);
+      svg = tess(width, height, size, colors, colorStrategy);
     } else if(pattern === 'herringbone') {
       svg = herringbone(width, height, size, colors);
     } else if (pattern === 'kites') {

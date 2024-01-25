@@ -8,9 +8,10 @@
 <body>
   <div class='menu'>
     <ul class='menu-actions'>
-      <li id='menu-patterns'>Patterns</li>
+      <li id='menu-patterns'>Pattern</li>
+      <li id='menu-color-strategy'>Color Strategy</li>
       <li id='menu-dimensions'>Dimensions</li>
-      <li id='menu-colors'>Colors</li>
+      <li id='menu-colors'>Color Palette</li>
       <li id='menu-sample-image'>Sample Image</li>
       <li id='menu-download'>Download</li>
       <li class='menu-separator'>|</li>
@@ -23,6 +24,10 @@
         <button id='pattern-herringbone' value='herringbone'>Herringbone</button>
         <button id='pattern-kites' value='kites'>Kites</button>
         <button id='pattern-palette' value='palette'>Palette</button>
+      </span>
+      <span id='submenu-color-strategy'>
+        <button id='color-strategy-random' value='random'>Random</button>
+        <button id='color-strategy-k-coloring' value='k-color'>K-Color</button>
       </span>
       <span id='submenu-dimensions'>
         <input class='text' type="number" id="width">
@@ -57,6 +62,7 @@
   <div id="svg-container"></div>
 
   <script src="./js/helper.js"></script>
+  <script src="./js/graph.js"></script>
   <script src="./js/generate.js"></script>
   <script src="./js/color-input.js"></script>
   <script src="./js/image.js"></script>

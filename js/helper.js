@@ -47,3 +47,33 @@ function hex3ToRgb(hex) {
     b: parseInt(result[3], 16)
   } : null;
 }
+
+function inBounds(grid, ...indexes) {
+  if (indexes.length == 0) {
+    return true
+  }
+
+  const x = indexes.shift()
+  return 0 <= x && x < grid.length && inBounds(grid[x], ...indexes)
+}
+
+function inBoundsIndex(grid, ...indexes) {
+  if (indexes.length == 0) {
+    return grid
+  }
+
+  const x = indexes.shift()
+  if (!inBounds(grid, x)) {
+    return undefined
+  }
+  return inBoundsIndex(grid[x], ...indexes)
+}
+
+function removeFirst(array, value) {
+  let index = array.findIndex(v => v === value);
+  if (index >= 0) {
+    array.splice(index, 1)
+    return true
+  }
+  return false
+}
